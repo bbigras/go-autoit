@@ -11,7 +11,12 @@
 //     import "github.com/brunoqc/go-autoit"
 //
 //     func main() {
-//         autoit.Run("notepad.exe", "", autoit.SW_NORMAL)
+//         success, pid := autoit.Run("notepad.exe", "", autoit.SW_NORMAL)
+//         if !success {
+//         	log.Panic("can't run process")
+//         } else {
+//         	log.Println("pid", pid)
+//         }
 //     }
 //
 // Build
@@ -40,6 +45,8 @@ const (
 
 // Run a program and don't wait
 // Possibles flags are SW_HIDE, SW_MINIMIZE, SW_MAXIMIZE and SW_NORMAL
-func Run(filename, workingdir string, flag int) {
-	C.AU3_Run((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(filename)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(workingdir)), C.long(flag))
+// returns true on success with the pid
+func Run(filename, workingdir string, flag int) (bool, int) {
+	pid := C.AU3_Run((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(filename)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(workingdir)), C.long(flag))
+	return C.AU3_error() == 0, int(pid)
 }

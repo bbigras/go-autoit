@@ -95,3 +95,8 @@ func Send(keys string, flag int) {
 func PixelGetColor(x, y int) int {
 	return int(C.AU3_PixelGetColor(C.long(x), C.long(y)))
 }
+
+// Set/get a property
+func Opt(option string, param int) int {
+	return int(C.AU3_Opt((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(option)), C.long(param)))
+}

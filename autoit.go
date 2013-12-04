@@ -60,3 +60,8 @@ func Run(filename, workingdir string, flag int) (bool, int) {
 func BlockInput(flag int) {
 	C.AU3_BlockInput(C.long(flag))
 }
+
+// Close a window
+func WinClose(title, text string) {
+	C.AU3_WinClose((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)))
+}

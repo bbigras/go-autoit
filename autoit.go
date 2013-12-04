@@ -89,3 +89,9 @@ func WinActivate(title, text string) {
 func Send(keys string, flag int) {
 	C.AU3_Send((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(keys)), C.long(flag))
 }
+
+// Get the color of the pixel at the specified location
+// return -1 if the location is invalid
+func PixelGetColor(x, y int) int {
+	return int(C.AU3_PixelGetColor(C.long(x), C.long(y)))
+}

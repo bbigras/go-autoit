@@ -43,10 +43,20 @@ const (
 	SW_NORMAL   = 4
 )
 
+const (
+	ENABLE_USER_INPUT  = 0
+	DISABLE_USER_INPUT = 1
+)
+
 // Run a program and don't wait
 // Possibles flags are SW_HIDE, SW_MINIMIZE, SW_MAXIMIZE and SW_NORMAL
 // returns true on success with the pid
 func Run(filename, workingdir string, flag int) (bool, int) {
 	pid := C.AU3_Run((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(filename)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(workingdir)), C.long(flag))
 	return C.AU3_error() == 0, int(pid)
+}
+
+// Block the keyboard and mouse
+func BlockInput(flag int) {
+	C.AU3_BlockInput(C.long(flag))
 }

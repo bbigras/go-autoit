@@ -29,7 +29,7 @@ set CGO_CFLAGS=-Ic:/AutoIt3/AutoItX/StandardDLL/VC6
 set CGO_LDFLAGS=-lAutoItX3
 
 # (for 64-bit)
-set CGO_LDFLAGS=-lAutoItX3_x64
+set CGO_LDFLAGS=-Lc:/AutoIt3/AutoItX -lAutoItX3_x64
 
 go build
 ```

@@ -3,7 +3,6 @@ package autoit
 /*
 #include <Windows.h>
 #include <AutoIt3.h>
-#cgo LDFLAGS: -lAutoItX3_x64
 */
 import "C"
 

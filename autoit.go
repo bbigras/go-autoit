@@ -1,3 +1,24 @@
+// A wrapper of AutoIt (AutoItX) for the Go Programming Language
+
+// A wrapper of AutoIt (AutoItX) for the Go Programming Language.
+//
+// Dependencies
+//     AutoIt (with AutoItX) from http://www.autoitscript.com/site/autoit/downloads/
+//
+// Example
+//     package main
+//
+//     import "github.com/brunoqc/go-autoit"
+//
+//     func main() {
+//         autoit.Run("notepad.exe", "", autoit.SW_NORMAL)
+//     }
+//
+// Build
+//     set CGO_CFLAGS=-Ic:/AutoIt3/AutoItX/StandardDLL/VC6
+//     set CGO_LDFLAGS=-lAutoItX3
+//     set CGO_LDFLAGS=-lAutoItX3_x64 # for 64-bit
+//     go build
 package autoit
 
 /*

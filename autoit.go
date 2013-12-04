@@ -114,3 +114,8 @@ func Opt(option string, param int) int {
 func ControlClick(title, text, controlID, button string, clicks, x, y int) int {
 	return int(C.AU3_ControlClick((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(controlID)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(button)), C.long(clicks), C.long(x), C.long(y)))
 }
+
+// Get a checksum of the pixel in a region
+func PixelChecksum(left, top, right, bottom, step int) int {
+	return int(C.AU3_PixelChecksum(C.long(left), C.long(top), C.long(right), C.long(bottom), C.long(step)))
+}

@@ -83,3 +83,9 @@ func WinGetState(title, text string) (bool, int) {
 func WinActivate(title, text string) {
 	C.AU3_WinActivate((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)))
 }
+
+// Simulate input on the keyboard
+// flag: 0: normal, 1: raw
+func Send(keys string, flag int) {
+	C.AU3_Send((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(keys)), C.long(flag))
+}

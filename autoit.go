@@ -79,3 +79,7 @@ func WinGetState(title, text string) (bool, int) {
 	result := C.AU3_WinGetState((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)))
 	return C.AU3_error() == 0, int(result)
 }
+
+func WinActivate(title, text string) {
+	C.AU3_WinActivate((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)))
+}

@@ -3,6 +3,9 @@ go-autoit
 
 A wrapper of AutoIt (AutoItX) for the Go Programming Language.
 
+##Dependencies##
+- AutoIt (with AutoItX) from http://www.autoitscript.com/site/autoit/downloads/
+
 ##Sample code##
 ```go
 package main

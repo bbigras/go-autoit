@@ -48,6 +48,15 @@ const (
 	DISABLE_USER_INPUT = 1
 )
 
+const (
+	STATE_EXISTS    = 1
+	STATE_VISIBLE   = 2
+	STATE_ENABLED   = 4
+	STATE_ACTIVE    = 8
+	STATE_MINIMIZED = 16
+	STATE_MAXIMIZED = 32
+)
+
 // Run a program and don't wait
 // Possibles flags are SW_HIDE, SW_MINIMIZE, SW_MAXIMIZE and SW_NORMAL
 // returns true on success with the pid
@@ -64,4 +73,9 @@ func BlockInput(flag int) {
 // Close a window
 func WinClose(title, text string) {
 	C.AU3_WinClose((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)))
+}
+
+func WinGetState(title, text string) (bool, int) {
+	result := C.AU3_WinGetState((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)))
+	return C.AU3_error() == 0, int(result)
 }

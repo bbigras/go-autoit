@@ -116,6 +116,6 @@ func ControlClick(title, text, controlID, button string, clicks, x, y int) int {
 }
 
 // Get a checksum of the pixel in a region
-func PixelChecksum(left, top, right, bottom, step int) int {
-	return int(C.AU3_PixelChecksum(C.long(left), C.long(top), C.long(right), C.long(bottom), C.long(step)))
+func PixelChecksum(left, top, right, bottom, step int) int64 {
+	return int64(C.AU3_PixelChecksum(C.long(left), C.long(top), C.long(right), C.long(bottom), C.long(step)))
 }

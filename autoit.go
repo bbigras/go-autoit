@@ -119,3 +119,8 @@ func ControlClick(title, text, controlID, button string, clicks, x, y int) int {
 func PixelChecksum(left, top, right, bottom, step int) int64 {
 	return int64(C.AU3_PixelChecksum(C.long(left), C.long(top), C.long(right), C.long(bottom), C.long(step)))
 }
+
+// Move the mouse pointer to a specific location
+func MouseMove(x, y, speed int) int {
+	return int(C.MouseMove(C.long(x), C.long(y), C.long(speed)))
+}

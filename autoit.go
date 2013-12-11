@@ -121,6 +121,6 @@ func PixelChecksum(left, top, right, bottom, step int) int64 {
 }
 
 // Move the mouse pointer to a specific location
-func MouseMove(x, y, speed int) int {
-	return int(C.MouseMove(C.long(x), C.long(y), C.long(speed)))
+func MouseMove(x, y, speed int) {
+	C.AU3_MouseMove(C.long(x), C.long(y), C.long(speed))
 }

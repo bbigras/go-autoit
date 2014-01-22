@@ -33,6 +33,7 @@ package autoit
 import "C"
 
 import (
+	"encoding/binary"
 	"syscall"
 )
 
@@ -86,6 +87,31 @@ func WinActive(title, text string) int {
 
 func WinExists(title, text string) int {
 	return int(C.AU3_WinExists((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text))))
+}
+
+func WinGetText(title, text string, bufSize int) (result string) {
+	// TODO: test if bufSize is not greater than 64KB
+	if bufSize < 1 {
+		panic("bufSize must be greater than 0")
+	}
+
+	data := make([]uint16, bufSize)
+
+	C.AU3_WinGetText((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)), (*_Ctype_WCHAR)(&data[0]), (C.int)(bufSize))
+
+	for _, char := range data {
+		if char == 0x0 {
+			break
+		}
+
+		buf := make([]byte, 2)
+		binary.LittleEndian.PutUint16(buf, char)
+
+		// FIXME: shoudln't have to only use the first byte
+		result += string(buf[0])
+	}
+
+	return
 }
 
 func WinActivate(title, text string) {

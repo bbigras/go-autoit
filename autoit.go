@@ -11,12 +11,12 @@
 //     import "github.com/brunoqc/go-autoit"
 //
 //     func main() {
-//         success, pid := autoit.Run("notepad.exe", "", autoit.SW_NORMAL)
-//         if !success {
-//         	log.Panic("can't run process")
-//         } else {
-//         	log.Println("pid", pid)
-//         }
+//     	success, pid := autoit.Run("notepad.exe", "", autoit.SW_NORMAL)
+//     	if !success {
+//     		log.Panic("can't run process")
+//     	}
+//
+//     	log.Println("pid", pid)
 //     }
 //
 // Build

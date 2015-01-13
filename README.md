@@ -15,9 +15,9 @@ func main() {
 	success, pid := autoit.Run("notepad.exe", "", autoit.SW_NORMAL)
 	if !success {
 		log.Panic("can't run process")
-	} else {
-		log.Println("pid", pid)
 	}
+
+	log.Println("pid", pid)
 }
 
 ```

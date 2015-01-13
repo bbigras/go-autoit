@@ -12,7 +12,7 @@ package main
 import "github.com/brunoqc/go-autoit"
 
 func main() {
-	success, pid := autoit.Run("notepad.exe", "", autoit.SW_NORMAL)
+	success, pid := autoit.Run("notepad.exe", "", autoit.SwNormal)
 	if !success {
 		log.Panic("can't run process")
 	}

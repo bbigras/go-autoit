@@ -1,7 +1,7 @@
-// Package autoit is a AutoIt (AutoItX) Go wrapper
+// Package autoit is a AutoItX Go wrapper
 //
 // Dependencies
-//     AutoIt (with AutoItX) from http://www.autoitscript.com/site/autoit/downloads/
+//     AutoItX (http://www.autoitscript.com/site/autoit/downloads/)
 //
 // Example
 //     package main

@@ -2,10 +2,10 @@ go-autoit
 =========
 [![GoDoc](https://godoc.org/github.com/brunoqc/go-autoit?status.png)](https://godoc.org/github.com/brunoqc/go-autoit)
 
-A wrapper of AutoIt (AutoItX) for the Go Programming Language. 
+A Go AutoItX wrapper.
 
 ##Dependencies##
-- AutoIt (with AutoItX) from http://www.autoitscript.com/site/autoit/downloads/
+- [AutoItX](http://www.autoitscript.com/site/autoit/downloads/)
 
 ##Sample code##
 ```go

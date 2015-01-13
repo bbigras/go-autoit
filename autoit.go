@@ -1,6 +1,4 @@
-// A wrapper of AutoIt (AutoItX) for the Go Programming Language
-
-// A wrapper of AutoIt (AutoItX) for the Go Programming Language.
+// Package autoit is a AutoIt (AutoItX) Go wrapper
 //
 // Dependencies
 //     AutoIt (with AutoItX) from http://www.autoitscript.com/site/autoit/downloads/

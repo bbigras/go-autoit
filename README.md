@@ -2,10 +2,7 @@ go-autoit
 =========
 [![GoDoc](https://godoc.org/github.com/brunoqc/go-autoit?status.png)](https://godoc.org/github.com/brunoqc/go-autoit)
 
-A Go AutoItX wrapper.
-
-##Dependencies##
-- [AutoItX](http://www.autoitscript.com/site/autoit/downloads/)
+A Go [AutoItX](https://www.autoitscript.com/site/autoit/) wrapper.
 
 ##Sample code##
 ```go
@@ -24,7 +21,7 @@ func main() {
 
 ```
 
-##Build with##
+##Build##
 
 You need the DLL (`AutoItX3.dll` or `AutoItX3_x64.dll` for 64-bit) in your `PATH`.
 

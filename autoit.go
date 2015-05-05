@@ -6,15 +6,19 @@
 // Example
 //     package main
 //
-//     import "github.com/brunoqc/go-autoit"
+//     import (
+//     	"fmt"
+//
+//     	"github.com/brunoqc/go-autoit"
+//     )
 //
 //     func main() {
 //     	success, pid := autoit.Run("notepad.exe", "", autoit.SwNormal)
 //     	if !success {
-//     		log.Panic("can't run process")
+//     		panic("can't run process")
 //     	}
 //
-//     	log.Println("pid", pid)
+//     	fmt.Println("pid", pid)
 //     }
 //
 // Build

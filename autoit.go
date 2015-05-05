@@ -18,21 +18,22 @@
 //     }
 //
 // Build
-//     set CGO_CFLAGS=-Ic:/AutoIt3/AutoItX/StandardDLL/VC6
-//     set CGO_LDFLAGS=-lAutoItX3
-//     set CGO_LDFLAGS=-lAutoItX3_x64 # for 64-bit
+//     set CGO_CFLAGS=-Ic:/AutoItX
+//     set CGO_LDFLAGS=-lAutoItX3_DLL
+//     set CGO_LDFLAGS=-lAutoItX3_x64_DLL # for 64-bit
 //     go build
 package autoit
 
 /*
 #include <Windows.h>
-#include <AutoIt3.h>
+#include "AutoItX3_DLL.h"
 */
 import "C"
 
 import (
 	"encoding/binary"
 	"syscall"
+	"unsafe"
 )
 
 const (
@@ -60,13 +61,8 @@ const (
 // Possibles flags are SwHide, SwMinimize, SwMaximize and SwNormal
 // returns true on success with the pid
 func Run(filename, workingdir string, flag int) (bool, int) {
-	pid := C.AU3_Run((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(filename)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(workingdir)), C.long(flag))
+	pid := C.AU3_Run((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(filename)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(workingdir)), C.int(flag))
 	return C.AU3_error() == 0, int(pid)
-}
-
-// BlockInput blocks the keyboard and mouse
-func BlockInput(flag int) {
-	C.AU3_BlockInput(C.long(flag))
 }
 
 // WinClose closes a window
@@ -124,32 +120,42 @@ func WinActivate(title, text string) {
 // Send simulates input on the keyboard
 // flag: 0: normal, 1: raw
 func Send(keys string, flag int) {
-	C.AU3_Send((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(keys)), C.long(flag))
+	C.AU3_Send((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(keys)), C.int(flag))
 }
 
 // PixelGetColor returns the color of the pixel at the specified location
 // return -1 if the location is invalid
 func PixelGetColor(x, y int) int {
-	return int(C.AU3_PixelGetColor(C.long(x), C.long(y)))
+	return int(C.AU3_PixelGetColor(C.int(x), C.int(y)))
 }
 
 // Opt is used to set/get a property
 func Opt(option string, param int) int {
-	return int(C.AU3_Opt((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(option)), C.long(param)))
+	return int(C.AU3_Opt((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(option)), C.int(param)))
 }
 
 // ControlClick clicks on a control without using the mouse pointer
 // TODO: x, y should be center by defaut
 func ControlClick(title, text, controlID, button string, clicks, x, y int) int {
-	return int(C.AU3_ControlClick((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(controlID)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(button)), C.long(clicks), C.long(x), C.long(y)))
+	return int(C.AU3_ControlClick((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(controlID)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(button)), C.int(clicks), C.int(x), C.int(y)))
+}
+
+// https://msdn.microsoft.com/en-us/library/windows/desktop/dd162897(v=vs.85).aspx
+type RECT struct {
+	Left   int
+	Top    int
+	Right  int
+	Bottom int
 }
 
 // PixelChecksum returns a checksum of the pixel in a region
 func PixelChecksum(left, top, right, bottom, step int) int64 {
-	return int64(C.AU3_PixelChecksum(C.long(left), C.long(top), C.long(right), C.long(bottom), C.long(step)))
+	r := RECT{left, top, right, bottom}
+
+	return int64(C.AU3_PixelChecksum((*C.struct_tagRECT)(unsafe.Pointer(&r)), C.int(step)))
 }
 
 // MouseMove moves the mouse's pointer to a specific location
 func MouseMove(x, y, speed int) {
-	C.AU3_MouseMove(C.long(x), C.long(y), C.long(speed))
+	C.AU3_MouseMove(C.int(x), C.int(y), C.int(speed))
 }

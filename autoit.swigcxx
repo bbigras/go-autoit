@@ -1,0 +1,8 @@
+%module autoit
+
+%{
+#include "AutoItX3_DLL.h"
+%}
+
+%include "windows.i"
+%include "AutoItX3_DLL.h"

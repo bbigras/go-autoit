@@ -80,6 +80,11 @@ func WinGetState(title, text string) (bool, int) {
 	return C.AU3_error() == 0, int(result)
 }
 
+// WinSetState sets a window's state
+func WinSetState(title, text string, flag int) {
+	C.AU3_WinSetState((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)), C.int(flag))
+}
+
 // WinActive returns true if the window is active
 func WinActive(title, text string) bool {
 	return int(C.AU3_WinActive((*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(title)), (*_Ctype_WCHAR)(syscall.StringToUTF16Ptr(text)))) == 1

@@ -1,6 +1,7 @@
 go-autoit
 =========
 [![GoDoc](https://godoc.org/github.com/brunoqc/go-autoit?status.png)](https://godoc.org/github.com/brunoqc/go-autoit)
+[![Build status](https://ci.appveyor.com/api/projects/status/nhb09oh0gei24md9?svg=true)](https://ci.appveyor.com/project/brunoqc/go-autoit)
 
 A Go [AutoItX](https://www.autoitscript.com/site/autoit/) wrapper.
 

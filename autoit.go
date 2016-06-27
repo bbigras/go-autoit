@@ -29,8 +29,8 @@
 package autoit
 
 import (
-	"encoding/binary"
 	"syscall"
+	"unicode/utf16"
 	"unsafe"
 )
 
@@ -93,6 +93,15 @@ func WinExists(title, text string) bool {
 	return int(AU3_WinExists(utf16str(title), utf16str(text))) == 1
 }
 
+func findTermChr(buff []uint16) int {
+	for i, char := range buff {
+		if char == 0x0 {
+			return i
+		}
+	}
+	panic("not supposed to happen")
+}
+
 // WinGetText returns the text contained in a window
 func WinGetText(title, text string, bufSize int) (result string) {
 	// TODO: test if bufSize is not greater than 64KB
@@ -103,20 +112,9 @@ func WinGetText(title, text string, bufSize int) (result string) {
 	buff := make([]uint16, bufSize)
 
 	AU3_WinGetText(utf16str(title), utf16str(text), SwigcptrLPWSTR(unsafe.Pointer(&buff)), bufSize)
+	pos := findTermChr(buff)
 
-	for _, char := range buff {
-		if char == 0x0 {
-			break
-		}
-
-		buf := make([]byte, 2)
-		binary.LittleEndian.PutUint16(buf, char)
-
-		// FIXME: shoudln't have to only use the first byte
-		result += string(buf[0])
-	}
-
-	return
+	return string(utf16.Decode(buff[0:pos]))
 }
 
 // WinActivate set the focus on a window
